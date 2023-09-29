@@ -1,6 +1,6 @@
 @php
 
-$name = $name ?? '';
+$name = $name ?? 'id_type';
 $label = $label ?? $name;
 $placeholder = $placeholder ?? $label;
 $value = $value ?? '';

@@ -76,17 +76,19 @@
                     'type' => 'text',
                 ])
 
-                @include('components.select', [
-                    'name' => 'id_type',
-                    'label' => 'Type de conseil',
-                    'placeholder' => 'Type de conseil',
-                    'key' => 'id_type',
-                    'disp' => 'nom',
-                    'selectOptions' => $typeConseils,
-                    'displayer' => '--Choisir un type de conseil--',
+                <div class="form-group">
+                    <label for="id_type">Type de conseil</label>
+                    <select class="form-control" id="id_type" name="id_type" placeholder="Veuillez selectionnez un type" required>
+                        @foreach ($typeConseils as $typeConseil)
+                            <option value="{{ $typeConseil->id }}">{{ $typeConseil->nom }}</option>
+                        @endforeach
+                    </select>
 
+                    @error('id_type')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
 
-                ])
+                </div>
                 <button class="w-100 btn btn-success" type="submit"> <span class="material-icons">add_circle_outline</span> Ajouter</button>
             </form>
         </div>
