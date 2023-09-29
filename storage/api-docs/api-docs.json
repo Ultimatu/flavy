@@ -1,0 +1,600 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Documentation",
+        "description": "Documentation des API de l'application =Flavy, solution pharmacie",
+        "license": {
+            "name": "URL Accueil",
+            "url": "https://lesinnovateurs.me"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/public/conseils": {
+            "get": {
+                "tags": [
+                    "API PUBLIC"
+                ],
+                "summary": "Get all Conseils",
+                "operationId": "4a5c9a7799da5cfded8253b9502dad47",
+                "responses": {
+                    "200": {
+                        "description": "Get all Conseils",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Conseils"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/public/conseils/{id}": {
+            "get": {
+                "tags": [
+                    "API PUBLIC"
+                ],
+                "summary": "Get Conseils by id",
+                "operationId": "5ed19a53044da18176949a177dcbf8c0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Conseils id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get Conseils by id",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Conseils"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/admin/conseils": {
+            "post": {
+                "tags": [
+                    "API ADMIN"
+                ],
+                "summary": "Add Conseils",
+                "operationId": "0ff479ff2b8543460059dcf9524e52e2",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Conseils"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Add Conseils",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Conseils"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/admin/conseils/{id}": {
+            "put": {
+                "tags": [
+                    "API ADMIN"
+                ],
+                "summary": "Update Conseils by id",
+                "operationId": "99675f32ec55cc109d98efc0cfe303a1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Conseils id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Conseils"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Update Conseils by id",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Conseils"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "API ADMIN"
+                ],
+                "summary": "Delete Conseils by id",
+                "operationId": "50696d19804630f23b7b40dce71d511e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Conseils id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Delete Conseils by id",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Conseils"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/public/typeconseils": {
+            "get": {
+                "tags": [
+                    "API PUBLIC"
+                ],
+                "summary": "Get all TypeConseils",
+                "operationId": "705980c92d23e35157d865131edac5e5",
+                "responses": {
+                    "200": {
+                        "description": "Get all TypeConseils",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/TypeConseil"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/public/typeconseils/{id}": {
+            "get": {
+                "tags": [
+                    "API PUBLIC"
+                ],
+                "summary": "Get TypeConseil by id",
+                "operationId": "b9f98e06688aabeeab27aec7a10a7e4d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "TypeConseil id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get TypeConseil by id",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TypeConseil"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/admin/typeconseils": {
+            "post": {
+                "tags": [
+                    "API ADMIN"
+                ],
+                "summary": "Add TypeConseil",
+                "operationId": "3b9e034a5ee35ec5e0348c712b265a12",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TypeConseil"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "TypeConseil created"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/admin/typeconseils/{id}": {
+            "put": {
+                "tags": [
+                    "API ADMIN"
+                ],
+                "summary": "Update TypeConseil by id",
+                "operationId": "1e1c627c88004ea9e55ae56920fb349e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "TypeConseil id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TypeConseil"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Update TypeConseil by id",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TypeConseil"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "API ADMIN"
+                ],
+                "summary": "Delete TypeConseil by id",
+                "operationId": "047375a59aa76ca1442f276882dc16f0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "TypeConseil id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Delete TypeConseil by id",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TypeConseil"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/login": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "User login",
+                "operationId": "535ffeda4b78916efd658b2844ea897a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "password123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful login, returns user and token"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/auth/register": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "User registration",
+                "operationId": "da8643013c2941f5ed7f8a9c9b4a7f7a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful registration"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/api/auth/logout": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "User logout",
+                "operationId": "46f8a14c8083abb69eed72768aa08629",
+                "responses": {
+                    "200": {
+                        "description": "Successfully logged out"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/refresh": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Refresh authentication token",
+                "operationId": "f3538b6e9c46bcf601a9d194288b03d4",
+                "responses": {
+                    "200": {
+                        "description": "Token refreshed"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Conseils": {
+                "title": "Conseils",
+                "description": "Conseils model",
+                "properties": {
+                    "id": {
+                        "description": "Conseils ID auto incremented",
+                        "type": "integer"
+                    },
+                    "titre": {
+                        "description": "Conseils titre",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Conseils description",
+                        "type": "string"
+                    },
+                    "image": {
+                        "description": "Conseils image",
+                        "type": "file"
+                    },
+                    "id_type": {
+                        "description": "Conseils, id_type de conseil, relation avec type_conseils",
+                        "type": "integer"
+                    },
+                    "created_at": {
+                        "description": "Conseils creation date and time",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Conseils last update date and time",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "TypeConseil": {
+                "title": "TypeConseil",
+                "description": "TypeConseil model",
+                "properties": {
+                    "id": {
+                        "description": "TypeConseil ID auto incremented",
+                        "type": "integer"
+                    },
+                    "nom": {
+                        "description": "TypeConseil nom",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "TypeConseil description",
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "description": "TypeConseil creation date and time",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "TypeConseil last update date and time",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "Roles": {
+                "title": "Roles",
+                "description": "Roles model",
+                "properties": {
+                    "id": {
+                        "description": "Roles ID auto incremented",
+                        "type": "integer"
+                    },
+                    "nom": {
+                        "description": "Roles nom",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Roles description",
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "description": "Roles creation date and time",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Roles last update date and time",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "User": {
+                "title": "User",
+                "description": "User model",
+                "properties": {
+                    "id": {
+                        "description": "User ID auto incremented",
+                        "type": "integer"
+                    },
+                    "fullname": {
+                        "description": "User fullname",
+                        "type": "string"
+                    },
+                    "adresse": {
+                        "description": "User adresse",
+                        "type": "string"
+                    },
+                    "ville": {
+                        "description": "User ville",
+                        "type": "string"
+                    },
+                    "role_id": {
+                        "description": "User role ID",
+                        "type": "integer"
+                    },
+                    "phone": {
+                        "description": "User phone number",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "User email",
+                        "type": "string",
+                        "format": "email"
+                    },
+                    "password": {
+                        "description": "User password",
+                        "type": "string",
+                        "format": "password"
+                    },
+                    "created_at": {
+                        "description": "User creation date and time",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "User last update date and time",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "image": {
+                        "description": "photo de l'utilisateur pas obligatoire",
+                        "type": "file"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}
