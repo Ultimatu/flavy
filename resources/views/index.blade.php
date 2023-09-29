@@ -86,7 +86,6 @@
                             <th>Id</th>
                             <th>Titre</th>
                             <th>Description</th>
-                            <th>Type de conseil</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
@@ -96,7 +95,6 @@
                                 <td>{{ $conseil->id }}</td>
                                 <td>{{ $conseil->titre }}</td>
                                 <td>{{ $conseil->description }}</td>
-                                <td>{{ $conseil->typeConseil->nom }}</td>
                                 <td>
                                     <form action="{{ route('delete-conseil', $conseil->id) }}" method="post" class="d-inline">
                                         @csrf
