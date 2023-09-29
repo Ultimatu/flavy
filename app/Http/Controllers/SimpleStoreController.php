@@ -64,7 +64,7 @@ class SimpleStoreController extends Controller
             $request->image->move(public_path('conseils'), $imageName);
             $finalName = 'conseils/' . $imageName;
         } else {
-            $imageName = null;
+            $finalName = null;
         }
 
         $conseil = new Conseils([
