@@ -81,6 +81,7 @@
                     'label' => 'Type de conseil',
                     'placeholder' => 'Type de conseil',
                     'key' => 'id_type',
+                    'disp' => 'nom',
                     'selectOptions' => $typeConseils,
                     'displayer' => '--Choisir un type de conseil--',
 

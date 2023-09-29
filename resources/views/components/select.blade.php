@@ -7,6 +7,7 @@ $value = $value ?? '';
 $required = $required ?? false;
 $selectOptions = $selectOptions ?? [];
 $key = $key ?? 'id';
+$disp = $disp
 $displayer = $displayer ?? '--Select--';
 
 $selected = old($name, $value);
@@ -18,7 +19,7 @@ $selected = old($name, $value);
     <select class="form-control" id="{{ $name }}" name="{{ $name }}" placeholder="{{ $placeholder }}" {{ $required ? 'required' : '' }}>
         <option value="">{{ $displayer }}</option>
         @foreach ($selectOptions as $option)
-            <option value="{{ $option->$key }}" {{ $option->$key == $selected ? 'selected' : '' }}>{{ $option }}</option>
+            <option value="{{ $option->$key }}" {{ $option->$key == $selected ? 'selected' : '' }}>{{ $option->$disp }}</option>
         @endforeach
     </select>
 
