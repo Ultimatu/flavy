@@ -7,7 +7,7 @@ $value = $value ?? '';
 $required = $required ?? false;
 $selectOptions = $selectOptions ?? [];
 $key = $key ?? 'id';
-$disp = $disp
+$disp = $disp;
 $displayer = $displayer ?? '--Select--';
 
 $selected = old($name, $value);
