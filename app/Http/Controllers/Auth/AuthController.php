@@ -47,7 +47,7 @@ class AuthController extends Controller
     /**
      * @OA\Post(
      *     path="/api/auth/login",
-     *     tags={"Authentication"},
+     *     tags={"Application mobile client et Desktop pharmacie"},
      *     summary="User login",
      *     @OA\RequestBody(
      *         required=true,
@@ -86,27 +86,7 @@ class AuthController extends Controller
         ], 200);
     }
 
-    /**
-     * @OA\Post(
-     *     path="/api/auth/register",
-     *     tags={"Authentication"},
-     *     summary="User registration",
-     *     @OA\RequestBody(
-     *         required=true,
-     *            @OA\JsonContent(ref="#/components/schemas/User"),
-     *
-     *     ),
-     *     @OA\Response(response="201", description="Successful registration"),
-     *     @OA\Response(response="400", description="Bad request")
-     * )
-     * )
-     * @param UserRequest $request
-     * @return JsonResponse
-     * @throws \Illuminate\Validation\ValidationException
-     * @throws \Exception
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
-     * @throws
-     */
+
 
     public function register(UserRequest $request)
     {
@@ -157,11 +137,54 @@ class AuthController extends Controller
         ], 201);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/auth/register-client",
+     *     tags={"Application mobile client"},
+     *     summary="User registration",
+     *     @OA\RequestBody(
+     *         required=true,
+     *            @OA\JsonContent(ref="#/components/schemas/User"),
+     *
+     *     ),
+     *     @OA\Response(response="201", description="Successful registration"),
+     *     @OA\Response(response="400", description="Bad request")
+     * )
+     * )
+     * @return JsonResponse
+     * @throws \Illuminate\Validation\ValidationException
+     * @throws \Exception
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws
+     */
+    public function registerClient(Request $request): JsonResponse
+    {
+
+        $userRequest = new UserRequest();
+        $request['role_id'] = 1;
+        $request->validate([
+            'fullname' => 'required|string|max:255',
+            'adresse' => 'nullable|string|max:255',
+            'phone' => 'required|string|max:255',
+            'photo' => 'nullable',
+            'ville' => 'nullable|string|max:255',
+            'email' => 'required|string|max:255',
+            'password' => 'required|string',
+            'role_id' => 'required|exists:roles,id',
+        ]);
+        $userRequest->merge($request->all());
+
+
+
+        return $this->register($userRequest);
+    }
+
+
 
     /**
      * @OA\Post(
      *     path="/api/auth/logout",
-     *     tags={"Authentication"},
+     *     tags={"Application mobile client et Desktop pharmacie"},
      *     summary="User logout",
      *    security={{"bearerAuth":{}}},
      *     @OA\Response(response="200", description="Successfully logged out"),
@@ -184,7 +207,7 @@ class AuthController extends Controller
     /**
      * @OA\Post(
      *     path="/api/auth/refresh",
-     *     tags={"Authentication"},
+     *     tags={"Application mobile client et Desktop pharmacie"},
      *     summary="Refresh authentication token",
      *     @OA\Response(response="200", description="Token refreshed"),
      *     @OA\Response(response="401", description="Unauthorized")

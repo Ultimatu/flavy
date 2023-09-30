@@ -14,6 +14,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::prefix("/auth")->group(function(){
+
+        Route::post("/login", [App\Http\Controllers\Auth\AuthController::class, "login"])->name("login");
+
+        Route::post("/logout", [App\Http\Controllers\Auth\AuthController::class, "logout"])->name("logout");
+
+        Route::post("/refresh", [App\Http\Controllers\Auth\AuthController::class, "refresh"])->name("refresh");
+
+        //reg Client
+
+        Route::post("/register-client", [App\Http\Controllers\Auth\AuthController::class, "registerClient"])->name("register-client");
+
+
+});
+
 
 Route::prefix("/public")->group(function () {
 

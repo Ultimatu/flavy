@@ -175,7 +175,7 @@
         "/api/public/typeconseils": {
             "get": {
                 "tags": [
-                    "API PUBLIC"
+                    "Application mobile client"
                 ],
                 "summary": "Get all TypeConseils",
                 "operationId": "705980c92d23e35157d865131edac5e5",
@@ -199,7 +199,7 @@
         "/api/public/typeconseils/{id}": {
             "get": {
                 "tags": [
-                    "API PUBLIC"
+                    "Application mobile client"
                 ],
                 "summary": "Get TypeConseil by id",
                 "operationId": "b9f98e06688aabeeab27aec7a10a7e4d",
@@ -341,7 +341,7 @@
         "/api/auth/login": {
             "post": {
                 "tags": [
-                    "Authentication"
+                    "Application mobile client et Desktop pharmacie"
                 ],
                 "summary": "User login",
                 "operationId": "535ffeda4b78916efd658b2844ea897a",
@@ -376,13 +376,13 @@
                 }
             }
         },
-        "/api/auth/register": {
+        "/api/auth/register-client": {
             "post": {
                 "tags": [
-                    "Authentication"
+                    "Application mobile client"
                 ],
                 "summary": "User registration",
-                "operationId": "da8643013c2941f5ed7f8a9c9b4a7f7a",
+                "operationId": "4cbee577e638cf093a239212e912b872",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -406,7 +406,7 @@
         "/api/auth/logout": {
             "post": {
                 "tags": [
-                    "Authentication"
+                    "Application mobile client et Desktop pharmacie"
                 ],
                 "summary": "User logout",
                 "operationId": "46f8a14c8083abb69eed72768aa08629",
@@ -428,7 +428,7 @@
         "/api/auth/refresh": {
             "post": {
                 "tags": [
-                    "Authentication"
+                    "Application mobile client et Desktop pharmacie"
                 ],
                 "summary": "Refresh authentication token",
                 "operationId": "f3538b6e9c46bcf601a9d194288b03d4",
@@ -544,10 +544,6 @@
                 "title": "User",
                 "description": "User model",
                 "properties": {
-                    "id": {
-                        "description": "User ID auto incremented",
-                        "type": "integer"
-                    },
                     "fullname": {
                         "description": "User fullname",
                         "type": "string"
@@ -559,10 +555,6 @@
                     "ville": {
                         "description": "User ville",
                         "type": "string"
-                    },
-                    "role_id": {
-                        "description": "User role ID",
-                        "type": "integer"
                     },
                     "phone": {
                         "description": "User phone number",
@@ -577,11 +569,6 @@
                         "description": "User password",
                         "type": "string",
                         "format": "password"
-                    },
-                    "created_at": {
-                        "description": "User creation date and time",
-                        "type": "string",
-                        "format": "date-time"
                     },
                     "updated_at": {
                         "description": "User last update date and time",

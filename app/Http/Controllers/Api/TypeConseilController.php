@@ -13,7 +13,7 @@ class TypeConseilController extends Controller
 
     /**
      * @OA\Get( path="/api/public/typeconseils",
-     *  tags={"API PUBLIC"},
+     *  tags={"Application mobile client"},
      * summary="Get all TypeConseils",
      *    @OA\Response(response="200",
      *    description="Get all TypeConseils",
@@ -36,7 +36,7 @@ class TypeConseilController extends Controller
 
     /**
      * @OA\Get( path="/api/public/typeconseils/{id}",
-     *  tags={"API PUBLIC"},
+     *  tags={"Application mobile client"},
      * summary="Get TypeConseil by id",
      *    @OA\Parameter(
      *    name="id",
