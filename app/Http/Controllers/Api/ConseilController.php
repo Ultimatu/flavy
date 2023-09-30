@@ -12,7 +12,7 @@ class ConseilController extends Controller
 
     /**
      * @OA\Get( path="/api/public/conseils",
-     *  tags={"API PUBLIC"},
+     *  tags={"Application mobile client"},
      * summary="Get all Conseils",
      *    @OA\Response(response="200",
      *    description="Get all Conseils",
@@ -32,7 +32,7 @@ class ConseilController extends Controller
 
     /**
      * @OA\Get( path="/api/public/conseils/{id}",
-     *  tags={"API PUBLIC"},
+     *  tags={"Application mobile client"},
      * summary="Get Conseils by id",
      *    @OA\Parameter(
      *    name="id",
