@@ -13,7 +13,7 @@
         "/api/public/conseils": {
             "get": {
                 "tags": [
-                    "API PUBLIC"
+                    "Application mobile client"
                 ],
                 "summary": "Get all Conseils",
                 "operationId": "4a5c9a7799da5cfded8253b9502dad47",
@@ -37,7 +37,7 @@
         "/api/public/conseils/{id}": {
             "get": {
                 "tags": [
-                    "API PUBLIC"
+                    "Application mobile client"
                 ],
                 "summary": "Get Conseils by id",
                 "operationId": "5ed19a53044da18176949a177dcbf8c0",
