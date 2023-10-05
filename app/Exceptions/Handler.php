@@ -53,7 +53,7 @@ class Handler extends ExceptionHandler
 
     public function shouldReturnJson($request, $throwable): bool
     {
-            return $request->wantsJson() || $request->expectsJson() || $throwable instanceof ValidationException;
+            return $request->is('api/*') || $request->wantsJson() || $request->expectsJson();
     }
 }
 

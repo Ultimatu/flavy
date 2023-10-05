@@ -172,6 +172,137 @@
                 }
             }
         },
+        "/api/public/type-assurances": {
+            "get": {
+                "tags": [
+                    "Application mobile client"
+                ],
+                "summary": "Liste de tous les types d'assurance",
+                "operationId": "0643788a3e2df17ef71ad15655dd8059",
+                "responses": {
+                    "200": {
+                        "description": "Liste des types d'assurance"
+                    }
+                }
+            }
+        },
+        "/api/type-assurances": {
+            "post": {
+                "tags": [
+                    "ADMIN"
+                ],
+                "summary": "Créer un nouveau type d'assurance",
+                "operationId": "dba064c5feb6048dc72297049b3b7764",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "libelle",
+                                    "description"
+                                ],
+                                "properties": {
+                                    "libelle": {
+                                        "description": "Nom du type d'assurance",
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "description": "Description du type d'assurance",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Type d'assurance créé avec succès"
+                    },
+                    "400": {
+                        "description": "Requête incorrecte"
+                    }
+                }
+            }
+        },
+        "/api/type-assurance/{id}": {
+            "put": {
+                "tags": [
+                    "ADMIN"
+                ],
+                "summary": "Mettre à jour un type d'assurance existant",
+                "operationId": "0d886cfa0e359ebb128fa7837f722cbe",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du type d'assurance à mettre à jour",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nom"
+                                ],
+                                "properties": {
+                                    "nom": {
+                                        "description": "Nom du type d'assurance",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Mise à jour réussie"
+                    },
+                    "400": {
+                        "description": "Requête incorrecte"
+                    },
+                    "404": {
+                        "description": "Type d'assurance non trouvé"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "ADMIN"
+                ],
+                "summary": "Supprimer un type d'assurance",
+                "operationId": "816b5feca14c592ea41e4a480762410a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du type d'assurance à supprimer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Type d'assurance supprimé avec succès"
+                    },
+                    "404": {
+                        "description": "Type d'assurance non trouvé"
+                    }
+                }
+            }
+        },
         "/api/public/typeconseils": {
             "get": {
                 "tags": [
@@ -338,6 +469,138 @@
                 }
             }
         },
+        "/api/user/update-assurance/{id}": {
+            "post": {
+                "tags": [
+                    "Application mobile client"
+                ],
+                "summary": "Mise à jour des informations d'assurance",
+                "operationId": "45bde6011f1966dfb578a0cf5046870a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id_type_assurance",
+                                    "n_assurance"
+                                ],
+                                "properties": {
+                                    "id_type_assurance": {
+                                        "description": "ID du type d'assurance",
+                                        "type": "integer"
+                                    },
+                                    "n_assurance": {
+                                        "description": "Numéro d'assurance",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Mise à jour réussie"
+                    },
+                    "400": {
+                        "description": "Requête incorrecte"
+                    },
+                    "404": {
+                        "description": "Utilisateur non trouvé"
+                    }
+                }
+            }
+        },
+        "/api/user/update-infos/{id}": {
+            "post": {
+                "tags": [
+                    "Application mobile client"
+                ],
+                "summary": "Mise à jour des informations personnelles",
+                "operationId": "a5521af2b64f6092aa822d0f72ad2d93",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "fullname",
+                                    "ville",
+                                    "adresse"
+                                ],
+                                "properties": {
+                                    "fullname": {
+                                        "description": "Nom complet",
+                                        "type": "string"
+                                    },
+                                    "ville": {
+                                        "description": "Ville",
+                                        "type": "string"
+                                    },
+                                    "adresse": {
+                                        "description": "Adresse",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Mise à jour réussie"
+                    },
+                    "400": {
+                        "description": "Requête incorrecte"
+                    },
+                    "404": {
+                        "description": "Utilisateur non trouvé"
+                    }
+                }
+            }
+        },
+        "/api/user/update-antecedant/{id}": {
+            "post": {
+                "tags": [
+                    "Application mobile client"
+                ],
+                "summary": "Mise à jour des antécédents médicaux",
+                "operationId": "6524965896264ac4759f07c3d9c740fe",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "maladie_chronique"
+                                ],
+                                "properties": {
+                                    "maladie_chronique": {
+                                        "description": "Maladie chronique",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Mise à jour réussie"
+                    },
+                    "400": {
+                        "description": "Requête incorrecte"
+                    },
+                    "404": {
+                        "description": "Utilisateur non trouvé"
+                    }
+                }
+            }
+        },
         "/api/auth/login": {
             "post": {
                 "tags": [
@@ -351,10 +614,10 @@
                         "application/json": {
                             "schema": {
                                 "properties": {
-                                    "email": {
+                                    "phone": {
                                         "type": "string",
-                                        "format": "email",
-                                        "example": "user@example.com"
+                                        "format": "phone",
+                                        "example": "1234567890"
                                     },
                                     "password": {
                                         "type": "string",
@@ -388,7 +651,49 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/User"
+                                "required": [
+                                    "fullname",
+                                    "phone",
+                                    "password",
+                                    "sexe"
+                                ],
+                                "properties": {
+                                    "fullname": {
+                                        "description": "User fullname",
+                                        "type": "string"
+                                    },
+                                    "adresse": {
+                                        "description": "User adresse",
+                                        "type": "string"
+                                    },
+                                    "ville": {
+                                        "description": "User ville",
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "description": "User phone number",
+                                        "type": "string",
+                                        "example": "+1234567890"
+                                    },
+                                    "email": {
+                                        "description": "User email",
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "utilisateur@example.com"
+                                    },
+                                    "password": {
+                                        "description": "User password",
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "motdepasse123"
+                                    },
+                                    "sexe": {
+                                        "description": "User gender",
+                                        "type": "string",
+                                        "example": "M"
+                                    }
+                                },
+                                "type": "object"
                             }
                         }
                     }
@@ -546,38 +851,94 @@
                 "properties": {
                     "fullname": {
                         "description": "User fullname",
-                        "type": "string"
+                        "required": [
+                            "fullname"
+                        ],
+                        "type": "string",
+                        "example": "John Doe"
                     },
                     "adresse": {
                         "description": "User adresse",
-                        "type": "string"
+                        "type": "string",
+                        "example": "123 Main St"
                     },
                     "ville": {
                         "description": "User ville",
-                        "type": "string"
+                        "type": "string",
+                        "example": "New York"
                     },
                     "phone": {
                         "description": "User phone number",
-                        "type": "string"
+                        "required": [
+                            "phone"
+                        ],
+                        "type": "string",
+                        "example": "123-456-7890"
                     },
                     "email": {
                         "description": "User email",
                         "type": "string",
-                        "format": "email"
+                        "format": "email",
+                        "example": "johndoe@example.com"
                     },
                     "password": {
                         "description": "User password",
+                        "required": [
+                            "password"
+                        ],
                         "type": "string",
-                        "format": "password"
-                    },
-                    "updated_at": {
-                        "description": "User last update date and time",
-                        "type": "string",
-                        "format": "date-time"
+                        "format": "password",
+                        "example": "mysecretpassword"
                     },
                     "image": {
-                        "description": "photo de l'utilisateur pas obligatoire",
+                        "description": "Photo de l'utilisateur (pas obligatoire)",
                         "type": "file"
+                    },
+                    "id_type_assurance": {
+                        "description": "ID du type d'assurance de l'utilisateur (Nullable)",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "n_cmu": {
+                        "description": "Numéro de la carte CMU de l'utilisateur",
+                        "type": "string",
+                        "example": "12345-67890"
+                    },
+                    "n_assurance": {
+                        "description": "Numéro de la carte d'assurance de l'utilisateur",
+                        "type": "string",
+                        "example": "A123456"
+                    },
+                    "sexe": {
+                        "description": "Sexe de l'utilisateur",
+                        "required": [
+                            "sexe"
+                        ],
+                        "type": "string",
+                        "enum": [
+                            "M",
+                            "F",
+                            "Autre"
+                        ],
+                        "example": "M"
+                    },
+                    "maladie_chronique": {
+                        "description": "Maladie chronique de l'utilisateur",
+                        "required": [
+                            "maladie_chronique"
+                        ],
+                        "type": "string",
+                        "example": "Diabète"
+                    },
+                    "poids": {
+                        "description": "Poids de l'utilisateur",
+                        "type": "string",
+                        "example": "75 kg"
+                    },
+                    "taille": {
+                        "description": "Taille de l'utilisateur",
+                        "type": "string",
+                        "example": "180 cm"
                     }
                 },
                 "type": "object"

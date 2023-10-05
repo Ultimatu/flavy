@@ -41,7 +41,7 @@ class AuthController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:sanctum')->except(['login', 'register']);
+        $this->middleware('auth:sanctum')->except(['login', 'registerClient']);
     }
 
     /**
@@ -52,7 +52,7 @@ class AuthController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             @OA\Property(property="email", type="string", format="email", example="user@example.com"),
+     *             @OA\Property(property="phone", type="string", format="phone", example="1234567890"),
      *             @OA\Property(property="password", type="string", example="password123")
      *         )
      *     ),
@@ -64,10 +64,10 @@ class AuthController extends Controller
     {
 
         $request->validate([
-            'email' => 'required|email',
+            'phone' => 'required|string',
             'password' => 'required|string'
         ]);
-        $credentials = $request->only(['email', 'password']);
+        $credentials = $request->only(['phone', 'password']);
 
         if (!$token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Connexion refusée, veuillez vérifier vos informations'], 401);
@@ -144,40 +144,152 @@ class AuthController extends Controller
      *     summary="User registration",
      *     @OA\RequestBody(
      *         required=true,
-     *            @OA\JsonContent(ref="#/components/schemas/User"),
-     *
+     *         @OA\JsonContent(
+     *             required={"fullname", "phone", "password", "sexe"},
+     *             type="object",
+     *             @OA\Property(property="fullname", type="string", description="User fullname"),
+     *             @OA\Property(property="adresse", type="string", description="User adresse"),
+     *             @OA\Property(property="ville", type="string", description="User ville"),
+     *             @OA\Property(property="phone", type="string", description="User phone number", example="+1234567890"),
+     *             @OA\Property(property="email", type="string", format="email", description="User email", example="utilisateur@example.com"),
+     *             @OA\Property(property="password", type="string", format="password", description="User password", example="motdepasse123"),
+     *             @OA\Property(property="sexe", type="string", description="User gender", example="M"),
+     *         ),
      *     ),
      *     @OA\Response(response="201", description="Successful registration"),
      *     @OA\Response(response="400", description="Bad request")
      * )
-     * )
-     * @return JsonResponse
-     * @throws \Illuminate\Validation\ValidationException
-     * @throws \Exception
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
-     * @throws
      */
     public function registerClient(Request $request): JsonResponse
     {
-
-        $userRequest = new UserRequest();
         $request['role_id'] = 1;
+
+        // Extraire les attributs de la demande
+        $attributes = $request->only([
+            'fullname',
+            'adresse',
+            'phone',
+            'ville',
+            'email',
+            'password',
+            'sexe',
+            'role_id',
+
+        ]);
+
         $request->validate([
             'fullname' => 'required|string|max:255',
             'adresse' => 'nullable|string|max:255',
             'phone' => 'required|string|max:255',
-            'photo' => 'nullable',
             'ville' => 'nullable|string|max:255',
-            'email' => 'required|string|max:255',
+            'email' => 'nullable|string|max:255',
             'password' => 'required|string',
             'role_id' => 'required|exists:roles,id',
+            'sexe' => 'required|string|max:255',
         ]);
-        $userRequest->merge($request->all());
 
+        // Vérifier si l'utilisateur existe par e-mail ou numéro de téléphone
+        $user = User::where('email', $attributes['email'])
+        ->orWhere('phone', $attributes['phone'])
+        ->first();
 
+        if ($user) {
+            return response()->json([
+                'message' => "Cet utilisateur existe déjà",
+            ], 400);
+        }
 
-        return $this->register($userRequest);
+        // Hasher le mot de passe
+        $attributes['password'] = bcrypt($attributes['password']);
+
+        // Créer l'utilisateur avec les attributs extraits
+        $user = User::create($attributes);
+
+        // Générer un jeton d'API
+        $tokens = $user->createToken('ApiToken')->plainTextToken;
+
+        return response()->json([
+            'user' => $user,
+            'Authorization' => [
+                'token' => $tokens,
+                'type' => 'Bearer'
+            ],
+            'message' => "Enregistrement effectué avec succès"
+        ],
+            201
+        );
     }
+
+
+
+
+    /*
+     * @OA\Put(
+     *     path="/api/auth/update-user/{id}",
+     *     tags={"Application mobile client"},
+     *     summary="Update user profile",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="User ID",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"fullname", "phone", "sexe"},
+     *             type="object",
+     *             @OA\Property(property="fullname", type="string", description="User fullname"),
+     *             @OA\Property(property="adresse", type="string", description="User adresse"),
+     *             @OA\Property(property="ville", type="string", description="User ville"),
+     *             @OA\Property(property="phone", type="string", description="User phone number", example="+1234567890"),
+     *             @OA\Property(property="email", type="string", format="email", description="User email", example="utilisateur@example.com"),
+     *             @OA\Property(property="password", type="string", format="password", description="User password", example="motdepasse123"),
+     *             @OA\Property(property="sexe", type="string", description="User gender", example="male"),
+     *             @OA\Property(property="maladie_chronique", type="string", description="User chronic illness", example="none"),
+     *             @OA\Property(property="poids", type="string", description="User weight", example="70 kg"),
+     *             @OA\Property(property="taille", type="string", description="User height", example="175 cm"),
+     *         ),
+     *     ),
+     *     @OA\Response(response="200", description="Successful update"),
+     *     @OA\Response(response="400", description="Bad request"),
+     *     @OA\Response(response="404", description="User not found")
+     * )
+     *
+    public function updateUser(Request $request, $id): JsonResponse
+    {
+        $user = User::find($id);
+
+        if (!$user) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
+
+        // Vérifiez les autorisations pour mettre à jour l'utilisateur si nécessaire
+
+        $request->validate([
+            'fullname' => 'required|string|max:255',
+            'adresse' => 'nullable|string|max:255',
+            'ville' => 'nullable|string|max:255',
+            'phone' => 'required|string|max:255',
+            'email' => 'nullable|string|max:255',
+            'sexe' => 'required|string|max:255',
+            'maladie_chronique' => 'nullable|string|max:255',
+            'poids' => 'nullable|string|max:255',
+            'taille' => 'nullable|string|max:255',
+            'n_cmu' => 'nullable|string|max:255',
+        ]);
+
+        // Mettez à jour les champs de l'utilisateur ici
+
+        $user->update($request->all());
+
+        return response()->json(['message' => 'User updated successfully'], 200);
+    }
+    */
+
 
 
 

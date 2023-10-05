@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Auth\AuthController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,28 +15,36 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix("/auth")->group(function(){
+Route::prefix('/auth')->group( function(){
 
-        Route::post("/login", [App\Http\Controllers\Auth\AuthController::class, "login"])->name("login");
+        Route::post("login", [AuthController::class, "login"])->name("login")->middleware("guest");
 
-        Route::post("/logout", [App\Http\Controllers\Auth\AuthController::class, "logout"])->name("logout");
+        Route::post("logout", [AuthController::class, "logout"])->name("logout")->middleware("auth:sanctum");
 
-        Route::post("/refresh", [App\Http\Controllers\Auth\AuthController::class, "refresh"])->name("refresh");
+        Route::post("refresh", [AuthController::class, "refresh"])->name("refresh")->middleware("auth:sanctum");
 
         //reg Client
-
-        Route::post("/register-client", [App\Http\Controllers\Auth\AuthController::class, "registerClient"])->name("register-client");
+        Route::post("register-client", [AuthController::class, "registerClient"])->name("register-client")->middleware("guest");
 
 
 });
+
+Route::middleware(['auth:sanctum', 'client'])->group(function () {
+    Route::prefix('user')->group(function () {
+        Route::post('update-assurance/{id}', [UserController::class, 'updateAssurance']);
+        Route::post('update-infos/{id}',  [UserController::class, 'updateInfos']);
+        Route::post('update-antecedant/{id}',  [UserController::class, 'updateAntecedant']);
+    });
+});
+
 
 
 Route::prefix("/public")->group(function () {
 
 
     /*==================
-    *GET ROUTES
-     */
+    *   GET ROUTES
+    */
     Route::get("/conseils", [App\Http\Controllers\Api\ConseilController::class, "getAll"])->name("conseils");
 
     Route::get("/conseils/{id}", [App\Http\Controllers\Api\ConseilController::class, "get"])->name("conseils.show");
@@ -43,6 +52,8 @@ Route::prefix("/public")->group(function () {
     Route::get("/typeconseils", [App\Http\Controllers\Api\TypeConseilController::class, "getAll"])->name("type-conseils");
 
     Route::get("/typeconseils/{id}", [App\Http\Controllers\Api\TypeConseilController::class, "get"])->name("type-conseils.get");
+
+    Route::get("/type-assurances", [App\Http\Controllers\Api\TypeAssuranceController::class, "getAll"])->name("type-assurances");
 });
 
 
