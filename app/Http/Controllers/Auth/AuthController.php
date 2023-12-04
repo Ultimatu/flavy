@@ -70,7 +70,7 @@ class AuthController extends Controller
         $credentials = $request->only(['phone', 'password']);
 
         if (!$token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Connexion refusée, veuillez vérifier vos informations'], 401);
+            return response()->json(['message' => 'Connexion refusée, veuillez vérifier vos informations'], 401);
         }
         auth()->user()->tokens()->delete();
 

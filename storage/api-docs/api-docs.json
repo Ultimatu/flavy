@@ -563,24 +563,20 @@
             }
         },
         "/api/user/update-antecedant/{id}": {
-            "post": {
+            "put": {
                 "tags": [
                     "Application mobile client"
                 ],
                 "summary": "Mise à jour des antécédents médicaux",
-                "operationId": "6524965896264ac4759f07c3d9c740fe",
+                "operationId": "89db5b8ca9d54a36bdfc214f5a13d785",
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": [
-                                    "maladie_chronique"
-                                ],
                                 "properties": {
-                                    "maladie_chronique": {
-                                        "description": "Maladie chronique",
-                                        "type": "string"
+                                    "user": {
+                                        "$ref": "#/components/schemas/User"
                                     }
                                 },
                                 "type": "object"
@@ -599,6 +595,44 @@
                         "description": "Utilisateur non trouvé"
                     }
                 }
+            }
+        },
+        "/api/private/user/get-my-datas": {
+            "get": {
+                "tags": [
+                    "Application mobile client"
+                ],
+                "summary": "Récupérer les données de l'utilisateur connecté",
+                "description": "Récupérer les données de l'utilisateur connecté",
+                "operationId": "getMyDatas",
+                "responses": {
+                    "200": {
+                        "description": "Récupérer les données de l'utilisateur connecté",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "user": {
+                                            "$ref": "#/components/schemas/User"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Non autorisé"
+                    },
+                    "404": {
+                        "description": "Utilisateur non trouvé"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/api/auth/login": {

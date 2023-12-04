@@ -31,9 +31,9 @@ Route::prefix('/auth')->group( function(){
 
 Route::middleware(['auth:sanctum', 'client'])->group(function () {
     Route::prefix('user')->group(function () {
-        Route::post('update-assurance/{id}', [UserController::class, 'updateAssurance']);
-        Route::post('update-infos/{id}',  [UserController::class, 'updateInfos']);
-        Route::post('update-antecedant/{id}',  [UserController::class, 'updateAntecedant']);
+        // Route::post('update-assurance/{id}', [UserController::class, 'updateAssurance']);
+        // Route::post('update-infos/{id}',  [UserController::class, 'updateInfos']);
+        Route::post('update/{id}',  [UserController::class, 'update']);
     });
 });
 
