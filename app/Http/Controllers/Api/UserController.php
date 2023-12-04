@@ -148,7 +148,7 @@ class UserController extends Controller
      *             @OA\Property(property="maladie_chronique", type="string", description="Maladie chronique de l'utilisateur"),
      *             @OA\Property(property="poids", type="string", description="Poids de l'utilisateur"),
      *             @OA\Property(property="taille", type="string", description="Taille de l'utilisateur"),
-     *             @OA\Property(property="image", type="string", format="binary", description="Image de l'utilisateur"),
+     *             @OA\Property(property="photo", type="string", format="binary", description="Image de l'utilisateur"),
      *         ),
      *     ),
      *     @OA\Response(response="200", description="Mise à jour réussie"),
